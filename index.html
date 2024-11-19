@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number Input Form</title>
+</head>
+<body>
+<div class="form-container">
+    <h2>Input Numbers</h2>
+    <form action="process_form.php" method="POST">
+        <div class="form-group">
+            <label for="startNumber">Start Number</label>
+            <input type="number" id="startNumber" name="start_number" required>
+        </div>
+        <div class="form-group">
+            <label for="endNumber">End Number</label>
+            <input type="number" id="endNumber" name="end_number" required>
+        </div>
+        <div class="form-group">
+            <label for="type">Select Type</label>
+            <select id="type" name="type_id" required>
+                <option value="" disabled selected>Select a type</option>
+                <?php
+                    include 'db_connection.php';
+
+                    $sql = "SELECT id, type FROM Type";
+                    $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                echo "
+                <option value='" . $row[' id
+                '] . "'>" . htmlspecialchars($row['type']) . "</option>";
+                }
+                } else {
+                echo "
+                <option disabled>No types available</option>
+                ";
+                }
+                $conn->close();
+                ?>
+            </select>
+        </div>
+        <div class="button-group">
+            <button type="submit" class="submit-btn">Submit</button>
+            <button type="button" class="cancel-btn" onclick="window.location.href='index.html'">Cancel</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
