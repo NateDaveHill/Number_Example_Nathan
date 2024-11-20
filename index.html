@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
     <title>Number Input Form</title>
 </head>
 <body>
@@ -21,24 +22,23 @@
             <select id="type" name="type_id" required>
                 <option value="" disabled selected>Select a type</option>
                 <?php
-                    include 'db_connection.php';
+    include 'db_connection.php';
 
-                    $sql = "SELECT id, type FROM Type";
-                    $result = $conn->query($sql);
+    // Query to retrieve types from the database
+    $sql = "SELECT id, type FROM Type";
+    $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
+                if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                echo "
-                <option value='" . $row[' id
-                '] . "'>" . htmlspecialchars($row['type']) . "</option>";
+                echo "<option value='" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['type']) . "</option>";
                 }
                 } else {
-                echo "
-                <option disabled>No types available</option>
-                ";
+                echo "<option disabled>No types available</option>";
                 }
+
                 $conn->close();
                 ?>
+
             </select>
         </div>
         <div class="button-group">
