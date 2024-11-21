@@ -19,18 +19,21 @@
         </div>
         <div class="form-group">
             <label for="type">Select Type</label>
-            <select name="type" id="type" required>
-                <option value="" disabled selected>Select a type</option>
-                <?php
-                    include('db_connection.php');
-                    $type_list = mysqli_querry($conn, "SELECT * from Types" );
-                    while ($c = myseql_fetch_array($type_list) {
-                    ?>
+            <select id="typeDropdown"></select>
+            <script>
+                fetch('get_types.php') // URL to the PHP file
+                    .then(response => response.json())
+                    .then(data => {
+                        const dropdown = document.getElementById('typeDropdown');
+                        data.forEach(type => {
+                            const option = document.createElement('option');
+                            option.value = type.id;
+                            option.textContent = type.type;
+                            dropdown.appendChild(option);
+                        });
+                    });
+            </script>
 
-
-                <option value=" <?php echo $c['id'] ?>"><?php echo $c['type'] ?></option> --------------HERE
-                <?php } ?>
-            </select>
         </div>
         <button type="submit">Submit</button>
         <button type="button" class="cancel-btn" onclick="window.location.href='index.html'">Cancel</button>
@@ -39,5 +42,6 @@
 </div>
 </body>
 </html>
+
 
 
