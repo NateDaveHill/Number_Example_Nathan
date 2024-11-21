@@ -19,30 +19,25 @@
         </div>
         <div class="form-group">
             <label for="type">Select Type</label>
-            <select name="type" id="type-dropdown" required>
+            <select name="type" id="type" required>
                 <option value="" disabled selected>Select a type</option>
                 <?php
-                include 'db_connection.php';
+                    include('db_connection.php');
+                    $type_list = mysqli_querry($conn, "SELECT * from Types" );
+                    while ($c = myseql_fetch_array($type_list) {
+                    ?>
 
-                $sql = "SELECT id, type FROM Type";
-                $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                echo "<option value='" . htmlspecialchars($row['id']) . "'>HERE</option>";
-                }
-                } else {
-                echo "<option disabled>No types available</option>";
-                }
-                $conn->close();
-                ?>
+                <option value=" <?php echo $c['id'] ?>"><?php echo $c['type'] ?></option> --------------HERE
+                <?php } ?>
             </select>
         </div>
-        <div class="button-group">
-            <button type="submit" class="submit-btn">Submit</button>
-            <button type="button" class="cancel-btn" onclick="window.location.href='index.html'">Cancel</button>
-        </div>
+        <button type="submit">Submit</button>
+        <button type="button" class="cancel-btn" onclick="window.location.href='index.html'">Cancel</button>
     </form>
+
 </div>
 </body>
 </html>
+
+
