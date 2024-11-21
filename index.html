@@ -19,9 +19,9 @@
         </div>
         <div class="form-group">
             <label for="type">Select Type</label>
-            <select id="typeDropdown"></select>
+            <select id="typeDropdown" name="type_id"></select>
             <script>
-                fetch('get_types.php') // URL to the PHP file
+                fetch('get_types.php')
                     .then(response => response.json())
                     .then(data => {
                         const dropdown = document.getElementById('typeDropdown');
